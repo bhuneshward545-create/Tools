@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Download HD videos from Instagram, YouTube, Chrome, Vidmate and more. Free, fast and secure video downloading service.">
+    <meta name="keywords" content="video downloader, Instagram downloader, YouTube downloader, download videos, HD video download, reel downloader, shorts downloader">
+    <meta name="author" content="VidGrabber">
+    <title>VidGrabber - Download HD Videos from Instagram, YouTube & More</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_AD_CLIENT_ID" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #7209b7;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --gray: #6c757d;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: var(--light);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+        
+        .tagline {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Ad Space Styles */
+        .ad-container {
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+        
+        .ad-unit {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            flex-direction: column;
+        }
+        
+        .ad-label {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 5px;
+        }
+        
+        .horizontal-ad {
+            width: 728px;
+            height: 90px;
+        }
+        
+        .vertical-ad {
+            width: 300px;
+            height: 600px;
+        }
+        
+        .square-ad {
+            width: 300px;
+            height: 250px;
+        }
+        
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .content-with-ads {
+            display: flex;
+            gap: 2rem;
+            width: 100%;
+        }
+        
+        .main-column {
+            flex: 1;
+        }
+        
+        .sidebar {
+            width: 300px;
+        }
+        
+        /* Download Card */
+        .download-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .input-group {
+            display: flex;
+            margin-bottom: 1.5rem;
+        }
+        
+        .url-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 50px 0 0 50px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        .url-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .paste-btn {
+            padding: 0 20px;
+            background: var(--primary);
+            border: none;
+            border-radius: 0 50px 50px 0;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .paste-btn:hover {
+            background: var(--secondary);
+        }
+        
+        /* Compression Options */
+        .compression-options {
+            margin: 1.5rem 0;
+        }
+        
+        .options-title {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .compression-levels {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        
+        .compression-option {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .compression-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .compression-option.active {
+            border-color: var(--success);
+            background: rgba(76, 201, 240, 0.1);
+        }
+        
+        .option-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .option-desc {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+        
+        .download-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(90deg, var(--accent), var(--warning));
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(242, 100, 48, 0.4);
+        }
+        
+        /* Platforms Section */
+        .platforms {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .platform {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 15px;
+            width: 100px;
+            transition: all 0.3s ease;
+        }
+        
+        .platform:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .platform-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .platform-name {
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+            width: 100%;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--success);
+        }
+        
+        .feature-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-desc {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        /* Instructions Section */
+        .instructions {
+            margin-top: 3rem;
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        .instructions-title {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+        }
+        
+        .step-number {
+            background: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .step-content h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .step-content p {
+            opacity: 0.8;
+        }
+        
+        /* FAQ Section */
+        .faq {
+            margin-top: 4rem;
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        .faq-title {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .faq-item {
+            margin-bottom: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-answer {
+            padding: 0 1.2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-answer.active {
+            padding: 0 1.2rem 1.2rem;
+            max-height: 500px;
+        }
+        
+        /* Footer */
+        footer {
+            margin-top: 4rem;
+            text-align: center;
+            opacity: 0.7;
+            font-size: 0.9rem;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .content-with-ads {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+            
+            .vertical-ad {
+                height: 250px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .download-card {
+                padding: 1.5rem;
+            }
+            
+            .input-group {
+                flex-direction: column;
+            }
+            
+            .url-input {
+                border-radius: 50px;
+                margin-bottom: 1rem;
+            }
+            
+            .paste-btn {
+                border-radius: 50px;
+                padding: 12px;
+            }
+            
+            .compression-levels {
+                flex-direction: column;
+            }
+            
+            .platforms {
+                gap: 0.5rem;
+            }
+            
+            .platform {
+                width: 80px;
+                padding: 0.8rem 0.5rem;
+            }
+            
+            .platform-icon {
+                font-size: 1.5rem;
+            }
+            
+            .step {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .step-number {
+                align-self: center;
+            }
+            
+            .horizontal-ad {
+                width: 100%;
+                max-width: 468px;
+                height: 60px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .download-card {
+                padding: 1rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .horizontal-ad {
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="logo">VidGrabber</h1>
+            <p class="tagline">Download HD videos from Instagram, YouTube, and more in Full HD quality</p>
+            
+            <!-- Top Banner Ad -->
+            <div class="ad-container">
+                <div class="ad-unit horizontal-ad">
+                    <div class="ad-label">Advertisement</div>
+                    <!-- AdSense Demo Content (Replace with actual AdSense code) -->
+                    <div style="color: rgba(255,255,255,0.7); font-size: 14px;">
+                        AdSense Banner Ad (728x90)<br>
+                        Replace with your AdSense code
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="content-with-ads">
+            <div class="main-column">
+                <main class="main-content">
+                    <div class="download-card">
+                        <h2 class="card-title">Paste Video URL</h2>
+                        <div class="input-group">
+                            <input type="text" class="url-input" placeholder="Paste Instagram, YouTube, or other video link here...">
+                            <button class="paste-btn">Paste</button>
+                        </div>
+                        
+                        <div class="compression-options">
+                            <h3 class="options-title">Select Compression Level</h3>
+                            <div class="compression-levels">
+                                <div class="compression-option active" data-level="high">
+                                    <div class="option-name">High Quality</div>
+                                    <div class="option-desc">Original Size</div>
+                                </div>
+                                <div class="compression-option" data-level="medium">
+                                    <div class="option-name">Balanced</div>
+                                    <div class="option-desc">Good Quality</div>
+                                </div>
+                                <div class="compression-option" data-level="low">
+                                    <div class="option-name">Small Size</div>
+                                    <div class="option-desc">Compressed</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="download-btn">Download in HD</button>
+                    </div>
+                    
+                    <!-- In-content Square Ad -->
+                    <div class="ad-container">
+                        <div class="ad-unit square-ad">
+                            <div class="ad-label">Advertisement</div>
+                            <!-- AdSense Demo Content (Replace with actual AdSense code) -->
+                            <div style="color: rgba(255,255,255,0.7); font-size: 14px;">
+                                AdSense Square Ad (300x250)<br>
+                                Replace with your AdSense code
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="platforms">
+                        <div class="platform">
+                            <div class="platform-icon"><i class="fab fa-instagram"></i></div>
+                            <span class="platform-name">Instagram</span>
+                        </div>
+                        <div class="platform">
+                            <div class="platform-icon"><i class="fab fa-youtube"></i></div>
+                            <span class="platform-name">YouTube</span>
+                        </div>
+                        <div class="platform">
+                            <div class="platform-icon"><i class="fab fa-chrome"></i></div>
+                            <span class="platform-name">Chrome</span>
+                        </div>
+                        <div class="platform">
+                            <div class="platform-icon"><i class="fas fa-download"></i></div>
+                            <span class="platform-name">Vidmate</span>
+                        </div>
+                        <div class="platform">
+                            <div class="platform-icon"><i class="fas fa-film"></i></div>
+                            <span class="platform-name">Reels</span>
+                        </div>
+                        <div class="platform">
+                            <div class="platform-icon"><i class="fas fa-bolt"></i></div>
+                            <span class="platform-name">Shorts</span>
+                        </div>
+                    </div>
+                    
+                    <div class="features">
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                            <h3 class="feature-title">Fast Download</h3>
+                            <p class="feature-desc">Download videos quickly with our optimized servers</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-desktop"></i></div>
+                            <h3 class="feature-title">HD Quality</h3>
+                            <p class="feature-desc">Get videos in Full HD 1080p and higher resolutions</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                            <h3 class="feature-title">Safe & Secure</h3>
+                            <p class="feature-desc">Your data privacy is our top priority</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-compress-alt"></i></div>
+                            <h3 class="feature-title">Compression Options</h3>
+                            <p class="feature-desc">Choose your preferred video quality and size</p>
+                        </div>
+                    </div>
+                    
+                    <!-- In-content Banner Ad -->
+                    <div class="ad-container">
+                        <div class="ad-unit horizontal-ad">
+                            <div class="ad-label">Advertisement</div>
+                            <!-- AdSense Demo Content (Replace with actual AdSense code) -->
+                            <div style="color: rgba(255,255,255,0.7); font-size: 14px;">
+                                AdSense Banner Ad (728x90)<br>
+                                Replace with your AdSense code
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="instructions">
+                        <h2 class="instructions-title">How to Download Videos</h2>
+                        <div class="steps">
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h3>Copy Video Link</h3>
+                                    <p>Go to Instagram, YouTube, or any supported platform and copy the video link</p>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h3>Paste the URL</h3>
+                                    <p>Paste the copied link in the input field above</p>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h3>Select Quality</h3>
+                                    <p>Choose your preferred compression level and video quality</p>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <h3>Download</h3>
+                                    <p>Click the download button and save your video</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq">
+                        <h2 class="faq-title">Frequently Asked Questions</h2>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>Is VidGrabber free to use?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Yes, VidGrabber is completely free to use. There are no hidden charges or subscription fees.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>What video quality can I download?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>You can download videos in various qualities including 480p, 720p, 1080p (Full HD), and even 4K when available. The available qualities depend on the source video.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>Is it legal to download videos with VidGrabber?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>VidGrabber is intended for personal use and downloading content that you have the right to download. Please respect copyright laws and terms of service of the platforms you're downloading from.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>Which platforms are supported?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>We support Instagram, YouTube, Facebook, Twitter, TikTok, Dailymotion, Vimeo, and many other popular video platforms.</p>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+            
+            <!-- Sidebar with Vertical Ad -->
+            <div class="sidebar">
+                <div class="ad-container">
+                    <div class="ad-unit vertical-ad">
+                        <div class="ad-label">Advertisement</div>
+                        <!-- AdSense Demo Content (Replace with actual AdSense code) -->
+                        <div style="color: rgba(255,255,255,0.7); font-size: 14px;">
+                            AdSense Vertical Ad (300x600)<br>
+                            Replace with your AdSense code
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Banner Ad -->
+        <div class="ad-container">
+            <div class="ad-unit horizontal-ad">
+                <div class="ad-label">Advertisement</div>
+                <!-- AdSense Demo Content (Replace with actual AdSense code) -->
+                <div style="color: rgba(255,255,255,0.7); font-size: 14px;">
+                    AdSense Banner Ad (728x90)<br>
+                    Replace with your AdSense code
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 VidGrabber - All rights reserved | Download videos for personal use only</p>
+            <p>Contact: support@vidgrabber.com</p>
+        </footer>
+    </div>
+
+    <script>
+        // Paste button functionality
+        document.querySelector('.paste-btn').addEventListener('click', async () => {
+            try {
+                const text = await navigator.clipboard.readText();
+                document.querySelector('.url-input').value = text;
+            } catch (err) {
+                alert('Failed to paste from clipboard. Please paste manually.');
+            }
+        });
+        
+        // Compression level selection
+        const compressionOptions = document.querySelectorAll('.compression-option');
+        compressionOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                compressionOptions.forEach(opt => opt.classList.remove('active'));
+                option.classList.add('active');
+            });
+        });
+        
+        // Download button functionality
+        document.querySelector('.download-btn').addEventListener('click', () => {
+            const url = document.querySelector('.url-input').value.trim();
+            const compressionLevel = document.querySelector('.compression-option.active').dataset.level;
+            
+            if (!url) {
+                alert('Please enter a video URL');
+                return;
+            }
+            
+            // Check if URL is from a supported platform
+            const supportedPlatforms = [
+                'instagram.com', 'youtube.com', 'youtu.be', 
+                'facebook.com', 'tiktok.com', 'twitter.com',
+                'dailymotion.com', 'vimeo.com'
+            ];
+            
+            const isSupported = supportedPlatforms.some(platform => url.includes(platform));
+            
+            if (!isSupported) {
+                alert('This platform is not supported or the URL is invalid. Please check the URL and try again.');
+                return;
+            }
+            
+            // Simulate download process
+            const downloadBtn = document.querySelector('.download-btn');
+            const originalText = downloadBtn.textContent;
+            
+            downloadBtn.textContent = 'Processing...';
+            downloadBtn.disabled = true;
+            
+            setTimeout(() => {
+                downloadBtn.textContent = `Downloading (${compressionLevel} quality)...`;
+                
+                setTimeout(() => {
+                    downloadBtn.textContent = originalText;
+                    downloadBtn.disabled = false;
+                    alert(`Your download in ${compressionLevel} quality should start shortly. If not, check your browser downloads.`);
+                }, 1500);
+            }, 2000);
+        });
+        
+        // FAQ functionality
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isActive = answer.classList.contains('active');
+                
+                // Close all answers
+                document.querySelectorAll('.faq-answer').forEach(ans => {
+                    ans.classList.remove('active');
+                });
+                
+                // If the clicked answer wasn't active, open it
+                if (!isActive) {
+                    answer.classList.add('active');
+                }
+            });
+        });
+        
+        // Initialize AdSense ads
+        function initializeAds() {
+            // This function would be called when the page loads
+            // In a real implementation, AdSense code would automatically initialize
+            console.log('AdSense ads initialized');
+            
+            // Example of how to push ads (commented out as we're using demo content)
+            /*
+            (adsbygoogle = window.adsbygoogle || []).push({
+                google_ad_client: "ca-pub-YOUR_AD_CLIENT_ID",
+                enable_page_level_ads: true
+            });
+            */
+        }
+        
+        // Call initialization when page loads
+        window.addEventListener('load', initializeAds);
+    </script>
+</body>
+</html>
